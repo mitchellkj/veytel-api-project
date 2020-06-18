@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils import timezone
-import datetime
+from datetime import timedelta
+from django.utils.timezone import now
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -10,7 +10,10 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        timeNow = now()
+        timeDelta = timedelta(days=1)
+        pubDate = self.pub_date
+        return timeNow - timeDelta <= pubDate <= timeNow
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

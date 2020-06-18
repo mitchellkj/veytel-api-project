@@ -1,9 +1,24 @@
-{% if latest_question_list %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veytel Nevi Classifier Ground Truth Builder</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'nevi_classifier/style.css' %}">
+</head>
+<body>
+    {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="/nevi_classifier/{{ question.id }}/">{{ question.question_text }}</a></li>
+        <li><a href="{% url 'nevi_classifier:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+    {% else %}
+       <p>No polls are available.</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+
